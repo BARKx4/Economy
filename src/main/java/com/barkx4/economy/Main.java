@@ -5,6 +5,7 @@ import com.barkx4.economy.init.ModBlocks;
 import com.barkx4.economy.init.ModItemGroups;
 import com.barkx4.economy.init.ModItems;
 import com.barkx4.economy.init.ModLootTables;
+import com.barkx4.economy.init.ModSounds;
 import com.barkx4.economy.interfaces.BankComponent;
 
 import nerdhub.cardinal.components.api.ComponentRegistry;
@@ -29,6 +30,7 @@ public class Main implements ModInitializer
     	ModBlocks.init();
     	ModLootTables.init();
     	ModItemGroups.init();
+    	ModSounds.init();
     	
     	// Add the component to every instance of PlayerEntity()
     	EntityComponentCallback.event(PlayerEntity.class).register((player, components) -> components.put(BANK, new BaseBankComponent()));

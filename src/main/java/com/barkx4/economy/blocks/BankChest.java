@@ -1,7 +1,11 @@
 package com.barkx4.economy.blocks;
 
+import com.barkx4.economy.gui.BankChestGui;
+import com.barkx4.economy.gui.BankChestScreen;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.sound.SoundCategory;
@@ -28,7 +32,7 @@ public class BankChest extends Block
     @Override
     public boolean activate(BlockState blockState, World world, BlockPos blockPos, PlayerEntity playerEntity, Hand hand, BlockHitResult blockHitResult)
     {
-        world.playSound(playerEntity, blockPos.getX(), blockPos.getY(), blockPos.getZ(), new SoundEvent(new Identifier("economy", "coin_sound")), SoundCategory.BLOCKS, 1.0F, 1.0F);
+    	MinecraftClient.getInstance().openScreen(new BankChestScreen(new BankChestGui(playerEntity, world, blockPos)));
         return true;
     }
  

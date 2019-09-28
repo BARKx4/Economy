@@ -3,6 +3,11 @@
     "sounds": [
       "economy:coins"
     ]
+  },
+  "register_sound": {
+    "sounds": [
+      "economy:register"
+    ]
   }
 }
 
