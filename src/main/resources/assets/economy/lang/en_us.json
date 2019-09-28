@@ -1,0 +1,7 @@
+{
+    "item.economy.gold_coins": "Gold Coins",
+	"item.economy.silver_coins": "Silver Coins",
+	"item.economy.copper_coins": "Copper Coins",
+	"item.economy.bank_chest": "Bank Chest",
+	"block.economy.bank_chest": "Bank Chest"
+}

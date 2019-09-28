@@ -1,0 +1,9 @@
+{
+    "parent": "block/orientable",
+    "textures": {
+        "top": "economy:block/bank_chest_top_bottom",
+        "front": "economy:block/bank_chest_front",
+        "side": "economy:block/bank_chest_side",
+		"bottom": "economy:block/bank_chest_top_bottom"
+    }
+}
