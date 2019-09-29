@@ -10,11 +10,13 @@ public class ModItems
     public static final Item GOLD_COINS = new Item(new Item.Settings().group(ItemGroup.MISC).maxCount(64));
     public static final Item SILVER_COINS = new Item(new Item.Settings().group(ItemGroup.MISC).maxCount(64));
     public static final Item COPPER_COINS = new Item(new Item.Settings().group(ItemGroup.MISC).maxCount(64));
+    public static final Item BANK_NOTE = new Item(new Item.Settings().group(ItemGroup.MISC).maxCount(1));
     
     public static void init()
     {
 	    Registry.register(Registry.ITEM, new Identifier("economy", "gold_coins"), GOLD_COINS);
 	    Registry.register(Registry.ITEM, new Identifier("economy", "silver_coins"), SILVER_COINS);
 	    Registry.register(Registry.ITEM, new Identifier("economy", "copper_coins"), COPPER_COINS);
+	    Registry.register(Registry.ITEM, new Identifier("economy", "bank_note"), BANK_NOTE);
     }
 }
