@@ -6,6 +6,7 @@ import io.github.cottonmc.cotton.gui.widget.WButton;
 import io.github.cottonmc.cotton.gui.widget.WGridPanel;
 import io.github.cottonmc.cotton.gui.widget.WLabel;
 import io.github.cottonmc.cotton.gui.widget.WSprite;
+import io.github.cottonmc.cotton.gui.widget.WTextField;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
@@ -24,12 +25,41 @@ public class BankChestGui extends LightweightGuiDescription
 {
     public BankChestGui(PlayerEntity playerEntity, World world, BlockPos blockPos) 
     {
+    	getBalance(playerEntity, world, blockPos);
+    	
+    	CompoundTag nbtData = Main.BANK.get(playerEntity).get();
+    	
+    	int iCopper = nbtData.getInt("copper");
+        int iSilver = nbtData.getInt("silver");
+        int iGold = nbtData.getInt("gold");
+        
         WGridPanel root = new WGridPanel();
         setRootPanel(root);
         root.setSize(140, 140);
         
-        WSprite icon = new WSprite(new Identifier("economy:textures/item/gold_coins.png"));
-        root.add(icon, 3, 0, 1, 1);
+        WLabel lblTitle = new WLabel("Bank Register");
+        root.add(lblTitle, 4, 0, 1, 1);
+        
+        WSprite icGold = new WSprite(new Identifier("economy:textures/item/gold_coins.png"));
+        root.add(icGold, 0, 1, 1, 1);
+        
+        WTextField tfGold = new WTextField();
+        tfGold.setText(String.valueOf(iGold));
+        root.add(tfGold, 1, 1, 2, 1);
+        
+        WSprite icSilver = new WSprite(new Identifier("economy:textures/item/silver_coins.png"));
+        root.add(icSilver, 4, 1, 1, 1);
+        
+        WTextField tfSilver = new WTextField();
+        tfSilver.setText(String.valueOf(iSilver));
+        root.add(tfSilver, 5, 1, 2, 1);
+        
+        WSprite icCopper = new WSprite(new Identifier("economy:textures/item/copper_coins.png"));
+        root.add(icCopper, 8, 1, 1, 1);
+        
+        WTextField tfCopper = new WTextField();
+        tfCopper.setText(String.valueOf(iCopper));
+        root.add(tfCopper, 9, 1, 2, 1);
         
         WButton depositButton = new WButton(new LiteralText("Deposit All")) {
 			@Override
@@ -39,22 +69,12 @@ public class BankChestGui extends LightweightGuiDescription
 			}
 		};
         root.add(depositButton, 0, 3, 4, 1);
-        
-        WButton balanceButton = new WButton(new LiteralText("Check Balance")) {
-			@Override
-			public void onClick(int x, int y, int button) 
-			{
-				getBalance(playerEntity, world, blockPos);
-			}
-		};
-        root.add(balanceButton, 0, 5, 4, 1);
-        
-        WLabel label = new WLabel(new LiteralText("Bank Chest"), 0xFFFFFF);
-        root.add(label, 0, 0, 2, 1);
     }
     
     public void getBalance(PlayerEntity playerEntity, World world, BlockPos blockPos)
     {
+    	if (world.isClient) return;
+    	
     	CompoundTag nbtData = Main.BANK.get(playerEntity).get();
     	
     	int iCopper = nbtData.getInt("copper");
@@ -63,12 +83,12 @@ public class BankChestGui extends LightweightGuiDescription
         
         playerEntity.sendMessage(new LiteralText("Your balance is " + String.valueOf(iGold) + " gold, " + String.valueOf(iSilver) + " silver, and " + String.valueOf(iCopper) + " copper."));
     	
-    	world.playSound(playerEntity, blockPos.getX(), blockPos.getY(), blockPos.getZ(), ModSounds.CASH_REGISTER_SOUND_EVENT, SoundCategory.BLOCKS, 1.0F, 1.0F);
+    	world.playSound(null, blockPos.getX(), blockPos.getY(), blockPos.getZ(), ModSounds.CASH_REGISTER_SOUND_EVENT, SoundCategory.BLOCKS, 1.0F, 1.0F);
     }
     
     public void depositAll(PlayerEntity playerEntity, World world, BlockPos blockPos)
     {
-    	//if (!world.isClient) return;
+    	if (world.isClient) return;
     	
     	CompoundTag nbtData = Main.BANK.get(playerEntity).get();
     	
@@ -121,7 +141,7 @@ public class BankChestGui extends LightweightGuiDescription
         
         playerEntity.sendMessage(new LiteralText("Your new balance is " + String.valueOf(iGold) + " gold, " + String.valueOf(iSilver) + " silver, and " + String.valueOf(iCopper) + " copper."));
     	
-    	world.playSound(playerEntity, blockPos.getX(), blockPos.getY(), blockPos.getZ(), ModSounds.COIN_SOUND_EVENT, SoundCategory.BLOCKS, 1.0F, 1.0F);
+    	world.playSound(null, blockPos.getX(), blockPos.getY(), blockPos.getZ(), ModSounds.COIN_SOUND_EVENT, SoundCategory.BLOCKS, 1.0F, 1.0F);
     }
     
     @Override
