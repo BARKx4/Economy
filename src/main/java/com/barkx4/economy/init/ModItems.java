@@ -1,5 +1,7 @@
 package com.barkx4.economy.init;
 
+import com.barkx4.economy.items.BankNoteItem;
+
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.util.Identifier;
@@ -10,7 +12,7 @@ public class ModItems
     public static final Item GOLD_COINS = new Item(new Item.Settings().group(ItemGroup.MISC).maxCount(64));
     public static final Item SILVER_COINS = new Item(new Item.Settings().group(ItemGroup.MISC).maxCount(64));
     public static final Item COPPER_COINS = new Item(new Item.Settings().group(ItemGroup.MISC).maxCount(64));
-    public static final Item BANK_NOTE = new Item(new Item.Settings().group(ItemGroup.MISC).maxCount(1));
+    public static final BankNoteItem BANK_NOTE = new BankNoteItem(new Item.Settings().group(ItemGroup.MISC).maxCount(1));
     
     public static void init()
     {

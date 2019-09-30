@@ -3,6 +3,7 @@
 	"item.economy.silver_coins": "Silver Coins",
 	"item.economy.copper_coins": "Copper Coins",
 	"item.economy.bank_chest": "Bank Chest",
+	"item.economy.bank_note": "Bank Note",
 	"block.economy.bank_chest": "Bank Chest",
 	"itemGroup.economy.economy_group": "Economy"
 }
