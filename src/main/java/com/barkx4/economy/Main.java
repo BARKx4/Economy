@@ -1,6 +1,9 @@
 package com.barkx4.economy;
 
+import java.io.IOException;
+
 import com.barkx4.economy.components.BaseBankComponent;
+import com.barkx4.economy.config.Config;
 import com.barkx4.economy.init.ModBlocks;
 import com.barkx4.economy.init.ModItemGroups;
 import com.barkx4.economy.init.ModItems;
@@ -19,7 +22,8 @@ import net.minecraft.util.Identifier;
 
 public class Main implements ModInitializer 
 {
-
+	public static final String MOD_ID = "economy";
+	
 	public static final ComponentType<BankComponent> BANK = 
 	        ComponentRegistry.INSTANCE.registerIfAbsent(new Identifier("economy:bank_component"), BankComponent.class);
 	
@@ -31,6 +35,16 @@ public class Main implements ModInitializer
     	ModLootTables.init();
     	ModItemGroups.init();
     	ModSounds.init();
+    	
+    	try 
+    	{
+			Config.init();
+		} 
+    	catch (IOException e) 
+    	{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     	
     	// Add the component to every instance of PlayerEntity()
     	EntityComponentCallback.event(PlayerEntity.class).register((player, components) -> components.put(BANK, new BaseBankComponent()));

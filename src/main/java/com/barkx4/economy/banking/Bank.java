@@ -100,7 +100,7 @@ public class Bank
     	return bankData;
     }
     
-    public static CompoundTag withdraw(int iGold, int iSilver, int iCopper, PlayerEntity playerEntity, TransactionType transaction, CompoundTag bankData)
+    public static CompoundTag withdraw(PlayerEntity playerEntity, TransactionType transactionType, Transaction transaction, CompoundTag bankData)
     {
     	if (playerEntity.inventory.getEmptySlot() == -1)
 		{
@@ -113,22 +113,22 @@ public class Bank
     	int iWithdrawCopper = 0;
 		
 		// Debit the amounts from the player's bank component storage
-		bankData.putInt("gold", (bankData.getInt("gold") - iGold));
-		bankData.putInt("silver", (bankData.getInt("silver") - iSilver));
-		bankData.putInt("copper", (bankData.getInt("copper") - iCopper));
+		bankData.putInt("gold", (bankData.getInt("gold") - transaction.gold));
+		bankData.putInt("silver", (bankData.getInt("silver") - transaction.silver));
+		bankData.putInt("copper", (bankData.getInt("copper") - transaction.copper));
 		
-		if (transaction == TransactionType.COIN)
+		if (transactionType == TransactionType.COIN)
 		{
-			while (iGold > 0)
+			while (transaction.gold > 0)
 			{
 				if (playerEntity.inventory.getEmptySlot() == -1)
 				{
 					playerEntity.sendMessage(new LiteralText("Your inventory is full! Stopping withdrawal."));
 					
 					// Refund unwithdrawn coins.
-					bankData.putInt("gold", (bankData.getInt("gold") + iGold));
-					bankData.putInt("silver", (bankData.getInt("silver") + iSilver));
-					bankData.putInt("copper", (bankData.getInt("copper") + iCopper));
+					bankData.putInt("gold", (bankData.getInt("gold") + transaction.gold));
+					bankData.putInt("silver", (bankData.getInt("silver") + transaction.silver));
+					bankData.putInt("copper", (bankData.getInt("copper") + transaction.copper));
 					playerEntity.sendMessage(new LiteralText("Received " + String.valueOf(iWithdrawGold) + " gold, " + String.valueOf(iWithdrawSilver) + " silver, and " + String.valueOf(iWithdrawCopper) + " copper."));
 					
 					return bankData;
@@ -136,33 +136,33 @@ public class Bank
 				
 				ItemStack is = null;
 				
-				if (iGold >= 64)
+				if (transaction.gold >= 64)
 				{
 					is = new ItemStack(ModItems.GOLD_COINS, 64);
 					
 					iWithdrawGold += 64;
-					iGold -= 64;
+					transaction.gold -= 64;
 				}
 				else 
 				{
-					is = new ItemStack(ModItems.GOLD_COINS, iGold);
+					is = new ItemStack(ModItems.GOLD_COINS, transaction.gold);
 
-					iWithdrawGold += iGold;
-					iGold = 0;
+					iWithdrawGold += transaction.gold;
+					transaction.gold = 0;
 				}
 				
 				playerEntity.inventory.insertStack(is);
 			}
 			
-			while (iSilver > 0)
+			while (transaction.silver > 0)
 			{
 				if (playerEntity.inventory.getEmptySlot() == -1)
 				{
 					playerEntity.sendMessage(new LiteralText("Your inventory is full! Stopping withdrawal."));
 					
 					// Refund unwithdrawn coins.
-					bankData.putInt("silver", (bankData.getInt("silver") + iSilver));
-					bankData.putInt("copper", (bankData.getInt("copper") + iCopper));
+					bankData.putInt("silver", (bankData.getInt("silver") + transaction.silver));
+					bankData.putInt("copper", (bankData.getInt("copper") + transaction.copper));
 					playerEntity.sendMessage(new LiteralText("Received " + String.valueOf(iWithdrawGold) + " gold, " + String.valueOf(iWithdrawSilver) + " silver, and " + String.valueOf(iWithdrawCopper) + " copper."));
 					
 					
@@ -171,32 +171,32 @@ public class Bank
 				
 				ItemStack is = null;
 				
-				if (iSilver >= 64)
+				if (transaction.silver >= 64)
 				{
 					is = new ItemStack(ModItems.SILVER_COINS, 64);
 					
 					iWithdrawSilver += 64;
-					iSilver -= 64;
+					transaction.silver -= 64;
 				}
 				else 
 				{
-					is = new ItemStack(ModItems.SILVER_COINS, iSilver);
+					is = new ItemStack(ModItems.SILVER_COINS, transaction.silver);
 					
-					iWithdrawSilver += iSilver;
-					iSilver = 0;
+					iWithdrawSilver += transaction.silver;
+					transaction.silver = 0;
 				}
 				
 				playerEntity.inventory.insertStack(is);
 			}
 			
-			while (iCopper > 0)
+			while (transaction.copper > 0)
 			{
 				if (playerEntity.inventory.getEmptySlot() == -1)
 				{
 					playerEntity.sendMessage(new LiteralText("Your inventory is full! Stopping withdrawal."));
 					
 					// Refund unwithdrawn coins.
-					bankData.putInt("copper", (bankData.getInt("copper") + iCopper));
+					bankData.putInt("copper", (bankData.getInt("copper") + transaction.copper));
 					playerEntity.sendMessage(new LiteralText("Received " + String.valueOf(iWithdrawGold) + " gold, " + String.valueOf(iWithdrawSilver) + " silver, and " + String.valueOf(iWithdrawCopper) + " copper."));
 					
 					return bankData;
@@ -204,19 +204,19 @@ public class Bank
 				
 				ItemStack is = null;
 				
-				if (iCopper >= 64)
+				if (transaction.copper >= 64)
 				{
 					is = new ItemStack(ModItems.COPPER_COINS, 64);
 					
 					iWithdrawCopper += 64;
-					iCopper -= 64;
+					transaction.copper -= 64;
 				}
 				else 
 				{
-					is = new ItemStack(ModItems.COPPER_COINS, iCopper);
+					is = new ItemStack(ModItems.COPPER_COINS, transaction.copper);
 					
-					iWithdrawCopper += iCopper;
-					iCopper = 0;
+					iWithdrawCopper += transaction.copper;
+					transaction.copper = 0;
 				}
 				
 				playerEntity.inventory.insertStack(is);
@@ -224,20 +224,20 @@ public class Bank
 			
 			playerEntity.sendMessage(new LiteralText("Received " + String.valueOf(iWithdrawGold) + " gold, " + String.valueOf(iWithdrawSilver) + " silver, and " + String.valueOf(iWithdrawCopper) + " copper."));
 		}
-		else if (transaction == TransactionType.BANKNOTE)
+		else if (transactionType == TransactionType.BANKNOTE)
 		{
 			// Create the bank note
 			CompoundTag bankNoteData = new CompoundTag();
-			bankNoteData.putInt("gold", iGold);
-			bankNoteData.putInt("silver", iSilver);
-			bankNoteData.putInt("copper", iCopper);
+			bankNoteData.putInt("gold", transaction.gold);
+			bankNoteData.putInt("silver", transaction.silver);
+			bankNoteData.putInt("copper", transaction.copper);
 			
 			ItemStack is = new ItemStack(ModItems.BANK_NOTE, 1);
 			is.setTag(bankNoteData);
 			
 			playerEntity.inventory.insertStack(is);
 			
-			playerEntity.sendMessage(new LiteralText("Received bank note for " + String.valueOf(iGold) + " gold, " + String.valueOf(iSilver) + " silver, and " + String.valueOf(iCopper) + " copper."));
+			playerEntity.sendMessage(new LiteralText("Received bank note for " + String.valueOf(transaction.gold) + " gold, " + String.valueOf(transaction.silver) + " silver, and " + String.valueOf(transaction.copper) + " copper."));
 		}
 		
 		return bankData;

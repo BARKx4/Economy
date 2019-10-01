@@ -17,6 +17,7 @@ import net.minecraft.world.World;
 import java.util.Optional;
 
 import com.barkx4.economy.banking.Bank;
+import com.barkx4.economy.banking.Transaction;
 import com.barkx4.economy.enums.TransactionType;
 import com.barkx4.economy.init.ModSounds;
 import com.google.common.primitives.Ints;
@@ -201,7 +202,8 @@ public class BankChestGui extends LightweightGuiDescription
 					
 				if (iWithdrawCopper > bankData.getInt("copper")) iWithdrawCopper = bankData.getInt("copper");
 				
-				bankData = Bank.withdraw(iWithdrawGold, iWithdrawSilver, iWithdrawCopper, playerEntity, TransactionType.COIN, bankData);
+				Transaction transaction = new Transaction(iWithdrawGold, iWithdrawSilver, iWithdrawCopper);
+				bankData = Bank.withdraw(playerEntity, TransactionType.COIN, transaction, bankData);
 				lblGold.setText(new LiteralText(String.valueOf(bankData.getInt("gold"))));
 				lblSilver.setText(new LiteralText(String.valueOf(bankData.getInt("silver"))));
 				lblCopper.setText(new LiteralText(String.valueOf(bankData.getInt("copper"))));
@@ -240,7 +242,8 @@ public class BankChestGui extends LightweightGuiDescription
 					
 				if (iWithdrawCopper > bankData.getInt("copper")) iWithdrawCopper = bankData.getInt("copper");
 				
-				bankData = Bank.withdraw(iWithdrawGold, iWithdrawSilver, iWithdrawCopper, playerEntity, TransactionType.BANKNOTE, bankData);
+				Transaction transaction = new Transaction(iWithdrawGold, iWithdrawSilver, iWithdrawCopper);
+				bankData = Bank.withdraw(playerEntity, TransactionType.BANKNOTE, transaction, bankData);
 				lblGold.setText(new LiteralText(String.valueOf(bankData.getInt("gold"))));
 				lblSilver.setText(new LiteralText(String.valueOf(bankData.getInt("silver"))));
 				lblCopper.setText(new LiteralText(String.valueOf(bankData.getInt("copper"))));

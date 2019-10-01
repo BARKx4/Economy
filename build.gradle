@@ -27,6 +27,7 @@ repositories {
       	name = "Cotton (snapshots)"
       	url = "http://server.bbkr.space:8081/artifactory/libs-snapshot/"
   	}
+
 }
 
 dependencies {
@@ -45,6 +46,7 @@ dependencies {
 	modApi "com.github.NerdHubMC.Cardinal-Components-API:cardinal-components-base:2.0.3"
 	modCompile "io.github.cottonmc:LibGui:1.3.2"
 }
+
 
 processResources {
 	inputs.property "version", project.version
