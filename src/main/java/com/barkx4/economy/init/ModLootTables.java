@@ -8,7 +8,6 @@ import net.fabricmc.fabric.api.loot.v1.event.LootTableLoadingCallback;
 import net.minecraft.entity.EntityType;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
-import net.minecraft.world.loot.ConstantLootTableRange;
 import net.minecraft.world.loot.UniformLootTableRange;
 import net.minecraft.world.loot.entry.ItemEntry;
 

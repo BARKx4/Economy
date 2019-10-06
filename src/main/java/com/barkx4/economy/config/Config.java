@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.Writer;
 import java.util.HashMap;
@@ -17,8 +16,6 @@ import com.google.gson.reflect.TypeToken;
 
 import net.minecraft.entity.EntityCategory;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.text.*;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 

@@ -1,16 +1,16 @@
 {
   "schemaVersion": 1,
   "id": "modid",
-  "version": "${version}",
+  "version": "1.0.0",
 
   "name": "Economy",
   "description": "An economy plugin offering physical currency drops, digital currency storage, transfers and banking.",
   "authors": [
-    "Me!"
+    "BARKx4"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "homepage": "https://github.com/BARKx4/Economy",
+    "sources": "https://github.com/BARKx4/Economy"
   },
 
   "license": "CC0-1.0",
@@ -20,10 +20,7 @@
   "entrypoints": {
     "main": [
       "com.barkx4.economy.Main"
-    ],
-	"client": [
-		"com.barkx4.economy.Client"
-	]
+    ]
   },
   "mixins": [
     "economy.mixins.json"
