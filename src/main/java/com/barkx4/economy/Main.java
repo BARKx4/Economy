@@ -6,6 +6,7 @@ import com.barkx4.economy.components.BaseBankComponent;
 import com.barkx4.economy.components.BaseVendingComponent;
 import com.barkx4.economy.config.Config;
 import com.barkx4.economy.entity.VendorEntity;
+import com.barkx4.economy.gui.VendorOwnerGui;
 import com.barkx4.economy.init.ModBlocks;
 import com.barkx4.economy.init.ModEntities;
 import com.barkx4.economy.init.ModItemGroups;
@@ -21,6 +22,7 @@ import nerdhub.cardinal.components.api.event.EntityComponentCallback;
 import nerdhub.cardinal.components.api.util.EntityComponents;
 import nerdhub.cardinal.components.api.util.RespawnCopyStrategy;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.container.ContainerProviderRegistry;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
 
@@ -55,8 +57,7 @@ public class Main implements ModInitializer
 		}
     	
     	// Add vending component to our vendor entities
-    	EntityComponentCallback.event(VendorEntity.class).register((entity, components) -> components.put(VENDING, new BaseVendingComponent()));
-    	
+    	EntityComponentCallback.event(VendorEntity.class).register((entity, components) -> components.put(VENDING, new BaseVendingComponent()));    	
     	// Add the component to every instance of PlayerEntity()
     	EntityComponentCallback.event(PlayerEntity.class).register((player, components) -> components.put(BANK, new BaseBankComponent()));
     	// Ensure the component's data is copied when the player respawns

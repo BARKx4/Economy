@@ -83,7 +83,7 @@ public class VendorEntity extends LivingEntity
 	@Override 
 	protected void applyDamage(DamageSource damageSource, float damage)
 	{
-		this.onDeath(damageSource);
+		this.remove();
 		return;
 		/*
 		if (damageSource.getAttacker() instanceof PlayerEntity)

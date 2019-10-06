@@ -53,7 +53,7 @@ public class MixinServerPlayNetworkHandler
 					if (player.getUuid().compareTo(UUIDowner) == 0)
 					{
 						System.out.println("Owner Menu");
-						MinecraftClient.getInstance().openScreen(new VendorOwnerScreen(new VendorOwnerGui(player, (VendorEntity)entity, world), player));
+						MinecraftClient.getInstance().openScreen(new VendorOwnerScreen(new VendorOwnerGui(entity.getEntityId(), player, (VendorEntity)entity, world), player));
 					}
 					else
 					{
