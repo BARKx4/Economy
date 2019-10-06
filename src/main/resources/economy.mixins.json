@@ -3,6 +3,7 @@
   "package": "com.barkx4.economy.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+	"MixinServerPlayNetworkHandler"
   ],
   "client": [
   ],

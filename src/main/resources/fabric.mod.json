@@ -20,7 +20,10 @@
   "entrypoints": {
     "main": [
       "com.barkx4.economy.Main"
-    ]
+    ],
+	"client": [
+		"com.barkx4.economy.Client"
+	]
   },
   "mixins": [
     "economy.mixins.json"
