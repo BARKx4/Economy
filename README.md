@@ -1,6 +1,4 @@
-# Economy
-A FabricMC Mod implementing an economy system and related items in Minecraft.
+# Vending
+NPCs for selling and buying items for both players and administrators. Sold to players via a Vendor Contract Deed item, they can be placed in world anywhere the player has rights to build and will charge a weekly duty fee that will be maintained from the player's Banking bank account or debited from the vendor's sale holdings. Fully configurable via GUI, with support for custom skin loading from network resources.
 
-Designed to be used stand alone, as an API for other supporting vending systems, or as a necessary component of the larger BARKx4 MMOverhaul total conversion mod or the BARKx4 Vending mod.
-
-This mod adds custom configurable coin loot table drops for all vanilla mobs (with support for custom mobs from other mods), gold, silver and copper coin item stacks, a Bank Chest item with GUI that allows users to deposit their physical coins into a global virtual storage account, the ability to withdraw coins, and the ability to create Bank Note items from stored virtual balance to exchange 'checks' for large amounts of currency to other players which may be deposited at any Bank Chest.
+Requires the BARKx4 Economy API.
